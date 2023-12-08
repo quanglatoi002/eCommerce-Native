@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv").config();
+const User = require("./models/user");
 
 const app = express();
 const port = 8000;
@@ -27,3 +29,93 @@ mongoose
     .catch((err) => {
         console.log("Error connecting to MongoDb", err);
     });
+
+const sendVerificationEmail = async (email, verificationToken) => {
+    // Create a Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_NAME,
+            pass: process.env.EMAIL_APP_PASSWORD,
+        },
+    });
+    console.log(transporter);
+
+    // nd gửi email
+    const mailOptions = {
+        from: "Công ty VQ",
+        to: email,
+        subject: "Email Verification",
+        text: `Pls click verify your email: http://localhost:8000/verify/${verificationToken}`,
+    };
+
+    //send email
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log("Verification email sent successfully");
+    } catch (error) {
+        console.error("Error sending verification email:", error);
+    }
+};
+
+// register
+app.post("/register", async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        // Check if the email is already registered
+        const existingUser = await User.findOne({ email });
+        // đã tồn tại
+        if (existingUser) {
+            console.log("Email already registered:", email);
+            return res
+                .status(400)
+                .json({ message: "Email already registered" });
+        }
+
+        const newUser = await User.create({ name, email, password });
+
+        //verify
+        newUser.verificationToken = crypto.randomBytes(20).toString("hex");
+
+        //save db
+        newUser.save();
+
+        //gửi verification email -> user
+        sendVerificationEmail(newUser.email, newUser.verificationToken);
+
+        res.status(201).json({
+            message:
+                "Registration successful. Please check your email for verification.",
+        });
+    } catch (error) {
+        console.log("Error during registration:", error); // Debugging statement
+        res.status(500).json({ message: "Registration failed" });
+    }
+});
+
+// get when user onclick
+app.get("/verify/:token", async (req, res) => {
+    try {
+        const token = req.params.token;
+
+        console.log(token);
+        //Find the user with the given verification token
+        const user = await User.findOne({ verificationToken: token });
+        if (!user) {
+            return res
+                .status(404)
+                .json({ message: "Invalid verification token" });
+        }
+
+        //Mark the user as verified
+        user.verified = true;
+        user.verificationToken = undefined;
+
+        await user.save();
+
+        res.status(200).json({ message: "Email verified successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Email Verification Failed" });
+    }
+});

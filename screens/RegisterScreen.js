@@ -7,11 +7,12 @@ import {
     KeyboardAvoidingView,
     TextInput,
     Pressable,
+    Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { MaterialIcons, AntDesign, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
+import axios from "axios";
 const RegisterScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,7 +25,29 @@ const RegisterScreen = () => {
             email: email,
             password: password,
         };
+
+        // call api to API
+        axios
+            .post("http://localhost:8000/register", user)
+            .then((response) => {
+                console.log(response);
+                Alert.alert(
+                    "Registration successful",
+                    "You have been registered Successfully"
+                );
+                setName("");
+                setEmail("");
+                setPassword("");
+            })
+            .catch((error) => {
+                Alert.alert(
+                    "Registration Error",
+                    "An error occurred while registering"
+                );
+                console.log("registration failed", error);
+            });
     };
+
     return (
         <SafeAreaView
             style={{
@@ -82,7 +105,7 @@ const RegisterScreen = () => {
                                 width: 300,
                                 fontSize: name ? 16 : 16,
                             }}
-                            placeholder="enter your name"
+                            placeholder="Enter your name"
                         />
                     </View>
 
@@ -113,7 +136,7 @@ const RegisterScreen = () => {
                                 width: 300,
                                 fontSize: password ? 16 : 16,
                             }}
-                            placeholder="enter your Email"
+                            placeholder="Enter your Email"
                         />
                     </View>
                 </View>
@@ -147,7 +170,7 @@ const RegisterScreen = () => {
                                 width: 300,
                                 fontSize: email ? 16 : 16,
                             }}
-                            placeholder="enter your Password"
+                            placeholder="Enter your Password"
                         />
                     </View>
                 </View>
