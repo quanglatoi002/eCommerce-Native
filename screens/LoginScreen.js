@@ -7,21 +7,52 @@ import {
     KeyboardAvoidingView,
     TextInput,
     Pressable,
+    Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const LoginScreen = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
 
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+            try {
+                const token = await AsyncStorage.getItem("authToken");
+
+                // có token mới chuyển trang
+                if (token) {
+                    navigation.replace("Main");
+                }
+            } catch (err) {
+                console.log("error message", err);
+            }
+        };
+        checkLoginStatus();
+    }, []);
+
     const handleLogin = () => {
         const user = {
             email: email,
             password: password,
         };
+        axios
+            .post("http://localhost:8000/login", user)
+            .then((response) => {
+                console.log(response);
+                const token = response.data.token;
+                AsyncStorage.setItem("authToken", token);
+                navigation.replace("Main");
+            })
+            .catch((error) => {
+                Alert.alert("Login Error", "Invalid Email");
+                console.log(error);
+            });
     };
     return (
         // hiển thị trong khu vực của màn hình
