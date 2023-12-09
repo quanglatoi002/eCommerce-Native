@@ -8,6 +8,7 @@ import {
     CartScreen,
     HomeScreen,
     ProfileScreen,
+    ProductInfoScreen,
 } from "../screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
@@ -102,6 +103,11 @@ const StackNavigation = () => {
                 <Stack.Screen
                     name="Main"
                     component={BottomTabs}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Info"
+                    component={ProductInfoScreen}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
