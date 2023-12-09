@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
 import DropDownPicker from "react-native-dropdown-picker";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import {
     MaterialIcons,
     AntDesign,
@@ -22,8 +22,10 @@ import { deals, images, list, offers } from "../utils/contain";
 import axios from "axios";
 import ProductItem from "../components/ProductItem";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
+import { UserType } from "../userContext";
 
 const HomeScreen = () => {
+    const { userId, setUserId } = useContext(UserType);
     const [addresses, setAddresses] = useState([]);
     const [products, setProducts] = useState([]);
     const navigation = useNavigation();
@@ -414,6 +416,7 @@ const HomeScreen = () => {
                         {/* already added addresses */}
                         {addresses?.map((item, index) => (
                             <Pressable
+                                key={index}
                                 onPress={() => setSelectedAdress(item)}
                                 style={{
                                     width: 140,
@@ -483,7 +486,7 @@ const HomeScreen = () => {
                                         textAlign: "center",
                                     }}
                                 >
-                                    India, Bangalore
+                                    Viet Name
                                 </Text>
                             </Pressable>
                         ))}
