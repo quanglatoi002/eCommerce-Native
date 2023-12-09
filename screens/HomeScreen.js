@@ -22,6 +22,9 @@ import { deals, images, list, offers } from "../utils/contain";
 import axios from "axios";
 import ProductItem from "../components/ProductItem";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
+
 import { UserType } from "../userContext";
 
 const HomeScreen = () => {
@@ -48,6 +51,8 @@ const HomeScreen = () => {
             fetchAddresses();
         }
     }, [userId, modalVisible]);
+
+    //get address
     const fetchAddresses = async () => {
         try {
             const response = await axios.get(
@@ -74,6 +79,21 @@ const HomeScreen = () => {
         };
 
         fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const token = await AsyncStorage.getItem("authToken");
+            console.log("tokennnnnn", token);
+
+            const decodedToken = token;
+            console.log("decoded token: " + decodedToken);
+
+            const userId = decodedToken.userId;
+            setUserId(userId);
+            console.log(userId);
+        };
+        fetchUser();
     }, []);
 
     const onGenderOpen = useCallback(() => {
@@ -379,7 +399,7 @@ const HomeScreen = () => {
                 </ScrollView>
             </SafeAreaView>
 
-            <BottomModal
+            {/* <BottomModal
                 onBackdropPress={() => setModalVisible(!modalVisible)}
                 swipeDirection={["up", "down"]}
                 swipeThreshold={200}
@@ -413,7 +433,7 @@ const HomeScreen = () => {
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
-                        {/* already added addresses */}
+                        
                         {addresses?.map((item, index) => (
                             <Pressable
                                 key={index}
@@ -519,7 +539,8 @@ const HomeScreen = () => {
                         </Pressable>
                     </ScrollView>
                 </ModalContent>
-            </BottomModal>
+            </BottomModal> 
+        */}
         </>
     );
 };
