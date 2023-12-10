@@ -22,6 +22,7 @@ const AddAddressScreen = () => {
         fetchAddresses();
     }, []);
     const fetchAddresses = async () => {
+        const userId = "6575b56d2cd638742054980d";
         try {
             const response = await axios.get(
                 `http://localhost:8000/addresses/${userId}`

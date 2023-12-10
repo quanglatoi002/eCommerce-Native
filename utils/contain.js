@@ -1,34 +1,34 @@
 export const list = [
-    {
-        id: "0",
-        image: "https://m.media-amazon.com/images/I/41EcYoIZhIL._AC_SY400_.jpg",
-        name: "Home",
-    },
+    // {
+    //     id: "0",
+    //     image: "https://m.media-amazon.com/images/I/41EcYoIZhIL._AC_SY400_.jpg",
+    //     name: "Home",
+    // },
     {
         id: "1",
         image: require("../assets/opp-4.jpg"),
         name: "Opp",
     },
-    {
-        id: "3",
-        image: "https://images-eu.ssl-images-amazon.com/images/I/31dXEvtxidL._AC_SX368_.jpg",
-        name: "Electronics",
-    },
+    // {
+    //     id: "3",
+    //     image: "https://images-eu.ssl-images-amazon.com/images/I/31dXEvtxidL._AC_SX368_.jpg",
+    //     name: "Electronics",
+    // },
     {
         id: "4",
         image: require("../assets/ap15.jpg"),
         name: "Mobiles",
     },
-    {
-        id: "5",
-        image: "https://m.media-amazon.com/images/G/31/img20/Events/Jup21dealsgrid/music.jpg",
-        name: "Music",
-    },
-    {
-        id: "6",
-        image: "https://m.media-amazon.com/images/I/51dZ19miAbL._AC_SY350_.jpg",
-        name: "Fashion",
-    },
+    // {
+    //     id: "5",
+    //     image: "https://m.media-amazon.com/images/G/31/img20/Events/Jup21dealsgrid/music.jpg",
+    //     name: "Music",
+    // },
+    // {
+    //     id: "6",
+    //     image: "https://m.media-amazon.com/images/I/51dZ19miAbL._AC_SY350_.jpg",
+    //     name: "Fashion",
+    // },
 ];
 
 export const images = [

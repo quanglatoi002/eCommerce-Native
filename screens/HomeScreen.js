@@ -23,6 +23,8 @@ import axios from "axios";
 import ProductItem from "../components/ProductItem";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import { UserType } from "../userContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { jwtDecode } from "jwt-decode";
 
 const HomeScreen = () => {
     const { userId, setUserId } = useContext(UserType);
@@ -79,6 +81,19 @@ const HomeScreen = () => {
     const onGenderOpen = useCallback(() => {
         setCompanyOpen(false);
     }, []);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const token = await AsyncStorage.getItem("authToken");
+            // const decodedToken = jwtDecode(token);
+            const userId = "6575b56d2cd638742054980d";
+            console.log("decoded token: " + decodedToken);
+            setUserId(userId);
+        };
+
+        fetchUser();
+    }, []);
+    console.log("address", addresses);
     return (
         <>
             <SafeAreaView
