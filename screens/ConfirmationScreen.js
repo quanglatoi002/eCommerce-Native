@@ -1,3 +1,4 @@
+"use strict";
 import {
     StyleSheet,
     Text,
@@ -14,7 +15,7 @@ import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanCart } from "../redux/CartReducer";
 import { useNavigation } from "@react-navigation/native";
-import RazorpayCheckout from "react-native-razorpay";
+// import RazorpayCheckout from "react-native-razorpay";
 
 const ConfirmationScreen = () => {
     const steps = [

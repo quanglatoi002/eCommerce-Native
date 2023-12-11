@@ -188,7 +188,7 @@ const ProfileScreen = () => {
                                     key={product._id}
                                 >
                                     <Image
-                                        source={product.image}
+                                        source={+product.image}
                                         style={{
                                             width: 100,
                                             height: 100,
