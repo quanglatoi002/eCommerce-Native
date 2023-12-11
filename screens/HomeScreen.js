@@ -261,7 +261,7 @@ const HomeScreen = () => {
                                         height: 180,
                                         resizeMode: "contain",
                                     }}
-                                    source={{ uri: item?.image }}
+                                    source={item?.image}
                                 />
                             </Pressable>
                         ))}
@@ -315,7 +315,7 @@ const HomeScreen = () => {
                                         height: 150,
                                         resizeMode: "contain",
                                     }}
-                                    source={{ uri: item?.image }}
+                                    source={item?.image}
                                 />
 
                                 <View

@@ -77,24 +77,24 @@ const ProfileScreen = () => {
         console.log("auth token cleared");
         navigation.replace("Login");
     };
-    // useEffect(() => {
-    //     const fetchOrders = async () => {
-    //         try {
-    //             const response = await axios.get(
-    //                 `http://localhost:8000/orders/${userId}`
-    //             );
-    //             const orders = response.data.orders;
-    //             setOrders(orders);
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:8000/orders/${userId}`
+                );
+                const orders = response.data.orders;
+                setOrders(orders);
 
-    //             setLoading(false);
-    //         } catch (error) {
-    //             console.log("error", error);
-    //         }
-    //     };
+                setLoading(false);
+            } catch (error) {
+                console.log("error", error);
+            }
+        };
 
-    //     fetchOrders();
-    // }, []);
-    console.log("orders", orders);
+        fetchOrders();
+    }, []);
+
     return (
         <ScrollView style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>
@@ -182,14 +182,13 @@ const ProfileScreen = () => {
                             }}
                             key={order._id}
                         >
-                            {/* Render the order information here */}
                             {order.products.slice(0, 1)?.map((product) => (
                                 <View
                                     style={{ marginVertical: 10 }}
                                     key={product._id}
                                 >
                                     <Image
-                                        source={{ uri: product.image }}
+                                        source={product.image}
                                         style={{
                                             width: 100,
                                             height: 100,

@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv").config();
 const User = require("./models/user");
+const Order = require("./models/order");
 
 const app = express();
 const port = 8000;

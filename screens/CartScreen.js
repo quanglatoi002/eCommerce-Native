@@ -18,12 +18,13 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 const CartScreen = () => {
-    const cart = useSelector((state) => state.cart.cart);
+    const cart = useSelector((state) => state?.cart.cart);
     console.log(cart);
+    const dispatch = useDispatch();
+
     const total = cart
         ?.map((item) => item.price * item.quantity)
         .reduce((curr, prev) => curr + prev, 0);
-    const dispatch = useDispatch();
     const increaseQuantity = (item) => {
         dispatch(inclementQuantity(item));
     };
@@ -86,7 +87,7 @@ const CartScreen = () => {
             </View>
 
             <Pressable
-                onPress={() => navigation.navigate("Confirm")}
+                onPress={() => navigation.navigate("ConfirmInfo")}
                 style={{
                     backgroundColor: "#FFC72C",
                     padding: 10,
@@ -137,7 +138,7 @@ const CartScreen = () => {
                                         height: 140,
                                         resizeMode: "contain",
                                     }}
-                                    source={{ uri: item?.image }}
+                                    source={item?.image}
                                 />
                             </View>
 
@@ -168,9 +169,6 @@ const CartScreen = () => {
                                     }}
                                 />
                                 <Text style={{ color: "green" }}>In Stock</Text>
-                                {/* <Text style={{ fontWeight: "500", marginTop: 6 }}>
-                    {item?.rating?.rate} ratings
-                  </Text> */}
                             </View>
                         </Pressable>
 

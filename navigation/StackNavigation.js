@@ -3,6 +3,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
+    ConfirmationScreen,
     LoginScreen,
     RegisterScreen,
     CartScreen,
@@ -11,6 +12,7 @@ import {
     ProductInfoScreen,
     AddAddressScreen,
     AddressScreen,
+    OrderScreen,
 } from "../screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
@@ -120,6 +122,16 @@ const StackNavigation = () => {
                 <Stack.Screen
                     name="Add"
                     component={AddressScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="ConfirmInfo"
+                    component={ConfirmationScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Order"
+                    component={OrderScreen}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

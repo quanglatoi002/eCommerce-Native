@@ -78,7 +78,7 @@ const ProductInfoScreen = () => {
                             marginTop: 25,
                             resizeMode: "contain",
                         }}
-                        source={{ uri: item }}
+                        source={item}
                         key={index}
                     >
                         <View
@@ -157,7 +157,7 @@ const ProductInfoScreen = () => {
                 </Text>
 
                 <Text style={{ fontSize: 18, fontWeight: "600", marginTop: 6 }}>
-                    ₹{route?.params?.price}
+                    ${route?.params?.price}
                 </Text>
             </View>
 
@@ -203,7 +203,7 @@ const ProductInfoScreen = () => {
                         marginVertical: 5,
                     }}
                 >
-                    Total : ₹{route.params.price}
+                    Total : ${route.params.price}
                 </Text>
                 <Text style={{ color: "#00CED1" }}>
                     FREE delivery Tomorrow by 3 PM.Order within 10hrs 30 mins
