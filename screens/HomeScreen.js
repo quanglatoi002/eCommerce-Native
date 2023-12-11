@@ -16,6 +16,7 @@ import {
     AntDesign,
     Feather,
     Ionicons,
+    Entypo,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { deals, images, list, offers } from "../utils/contain";
@@ -51,6 +52,7 @@ const HomeScreen = () => {
         }
     }, [userId, modalVisible]);
     const fetchAddresses = async () => {
+        const userId = "6575b56d2cd638742054980d";
         try {
             const response = await axios.get(
                 `http://localhost:8000/addresses/${userId}`
@@ -87,7 +89,7 @@ const HomeScreen = () => {
             const token = await AsyncStorage.getItem("authToken");
             // const decodedToken = jwtDecode(token);
             const userId = "6575b56d2cd638742054980d";
-            console.log("decoded token: " + decodedToken);
+            // console.log("decoded token: " + decodedToken);
             setUserId(userId);
         };
 
@@ -130,7 +132,7 @@ const HomeScreen = () => {
                                 size={22}
                                 color="black"
                             />
-                            <TextInput placeholder="Tìm kiếm sản phẩm" />
+                            <TextInput placeholder="Search" />
                         </Pressable>
 
                         <Feather name="mic" size={24} color="black" />

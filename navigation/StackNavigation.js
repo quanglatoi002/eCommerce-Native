@@ -10,6 +10,7 @@ import {
     ProfileScreen,
     ProductInfoScreen,
     AddAddressScreen,
+    AddressScreen,
 } from "../screens";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
@@ -114,6 +115,11 @@ const StackNavigation = () => {
                 <Stack.Screen
                     name="Address"
                     component={AddAddressScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Add"
+                    component={AddressScreen}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
