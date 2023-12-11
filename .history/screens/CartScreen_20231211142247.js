@@ -12,7 +12,7 @@ import { Feather, AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
     decrementQuantity,
-    inclementQuantity,
+    incementQuantity,
     removeFromCart,
 } from "../redux/CartReducer";
 import { useNavigation } from "@react-navigation/native";
@@ -25,7 +25,7 @@ const CartScreen = () => {
         .reduce((curr, prev) => curr + prev, 0);
     const dispatch = useDispatch();
     const increaseQuantity = (item) => {
-        dispatch(inclementQuantity(item));
+        dispatch(incementQuantity(item));
     };
     const decreaseQuantity = (item) => {
         dispatch(decrementQuantity(item));
